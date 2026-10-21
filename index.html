@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rasoi Ghar Tiffins – Home-cooked lunch, delivered daily</title>
+<meta name="description" content="Fresh home-style dal, sabzi, roti and rice, cooked every morning and delivered by 1 pm. Daily, weekly and monthly tiffin plans.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Mukta:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#22281f; --muted:#5d6659; --leaf:#2e5e3e; --leaf-dark:#234a30;
+  --haldi:#e9a426; --chili:#b4442c; --steel:#dde2e5; --steel-dark:#9aa4ab;
+  --surface:#ffffff; --tint:#f1f4f0; --line:#d9dfd6;
+  --display:"Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Mukta", "Segoe UI", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--surface);color:var(--ink);font:400 1.125rem/1.6 var(--body)}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0}
+a{color:var(--leaf)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--haldi);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.5rem}
+
+/* header */
+.top{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0}
+.brand{font:700 1.5rem var(--display);color:var(--ink);text-decoration:none}
+.brand span{color:var(--leaf)}
+.top nav a{margin-left:1.5rem;color:var(--muted);text-decoration:none;font-weight:600}
+.top nav a:hover{color:var(--ink)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;padding:3rem 0 5rem}
+.hero h1{font-size:clamp(2.4rem,5.2vw,4rem);font-weight:700;letter-spacing:-.01em}
+.hero p{font-size:1.25rem;color:var(--muted);max-width:32rem;margin:1.25rem 0 2rem}
+.actions{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+.btn{display:inline-block;background:var(--leaf);color:#fff;text-decoration:none;font-weight:600;padding:.85rem 1.5rem;border-radius:999px}
+.btn:hover{background:var(--leaf-dark)}
+.link{font-weight:600}
+.note{font-size:1rem;color:var(--muted);margin-top:1.5rem}
+
+/* the tiffin */
+.dabba{justify-self:center;width:min(320px,100%)}
+.dabba-day{text-align:center;font:600 1rem var(--body);color:var(--muted);margin-bottom:.75rem}
+.handle{width:46%;height:70px;margin:0 auto -14px;border:12px solid var(--steel-dark);border-bottom:0;border-radius:90px 90px 0 0}
+.tier{position:relative;height:74px;margin-top:-4px;border-radius:16px;
+  background:linear-gradient(90deg,#c3cacf 0%,#f4f6f7 28%,#dfe4e7 55%,#b7bfc5 100%);
+  box-shadow:inset 0 -6px 0 rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;
+  font:700 1.25rem var(--display);color:#3a4248;text-align:center;padding:0 1.5rem}
+.tier::before,.tier::after{content:"";position:absolute;top:22px;width:12px;height:30px;background:var(--steel-dark);border-radius:4px}
+.tier::before{left:-8px}.tier::after{right:-8px}
+.tier small{display:block;font:400 .875rem var(--body);color:#69737a}
+.tier.lid{height:28px;border-radius:16px 16px 6px 6px}
+.tier.lid::before,.tier.lid::after{display:none}
+@media (prefers-reduced-motion:no-preference){
+  .tier{animation:stack .5s cubic-bezier(.2,.8,.3,1.2) both}
+  .tier:nth-child(3){animation-delay:.1s}.tier:nth-child(4){animation-delay:.2s}
+  .tier:nth-child(5){animation-delay:.3s}.tier:nth-child(6){animation-delay:.4s}
+  @keyframes stack{from{opacity:0;transform:translateY(-28px)}to{opacity:1;transform:none}}
+}
+
+/* sections */
+section{padding:4.5rem 0}
+.tinted{background:var(--tint)}
+section h2{font-size:clamp(1.9rem,3.5vw,2.6rem);margin-bottom:.75rem}
+.lead{color:var(--muted);max-width:38rem;margin:0 0 2.5rem}
+
+/* menu table */
+.table-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:620px;background:var(--surface);border-radius:14px;overflow:hidden}
+th,td{text-align:left;padding:.9rem 1.1rem;border-bottom:1px solid var(--line)}
+th{font:600 1rem var(--body);color:var(--muted);background:#e6ebe4}
+td:first-child{font-weight:600}
+tr.today td{background:#fdf3dc}
+tr.today td:first-child::after{content:" (today)";font-weight:400;color:var(--chili)}
+
+/* plans */
+.plans{border-top:2px solid var(--ink)}
+.plan{display:grid;grid-template-columns:15rem 1fr 11rem;gap:1.5rem;align-items:baseline;padding:1.5rem 1rem;border-left:6px solid transparent;border-bottom:1px solid var(--line)}
+.plan h3{font-size:1.6rem}
+.plan p{margin:0;color:var(--muted)}
+.price{font:700 1.75rem var(--display);white-space:nowrap;justify-self:end}
+.price small{font:400 1rem var(--body);color:var(--muted)}
+.plan.pick{background:linear-gradient(90deg,#fdf3dc,transparent 80%);border-left-color:var(--haldi)}
+.tag{display:inline-block;margin-left:.5rem;font:600 .875rem var(--body);color:var(--chili);vertical-align:middle}
+
+/* steps */
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;counter-reset:s}
+.steps li{counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:50%;background:var(--haldi);color:var(--ink);font:700 1.4rem var(--display);margin-bottom:1rem}
+.steps h3{font-size:1.4rem;margin-bottom:.35rem}
+.steps p{margin:0;color:var(--muted)}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:start}
+.contact dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.6rem 1.25rem}
+.contact dt{font-weight:600}
+.contact dd{margin:0;color:var(--muted)}
+footer{padding:2rem 0 2.5rem;color:var(--muted);font-size:.95rem;border-top:1px solid var(--line)}
+
+@media (max-width:820px){
+  .hero,.contact{grid-template-columns:1fr}
+  .hero{padding-top:1.5rem;gap:2.5rem}
+  .top nav{display:none}
+  .plan{grid-template-columns:1fr auto;padding:1.25rem .75rem}
+  .plan p{grid-column:1/-1;grid-row:2}
+  .steps{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#">Rasoi Ghar <span>Tiffins</span></a>
+    <nav aria-label="Main"><a href="#menu">Weekly menu</a><a href="#plans">Plans</a><a href="#contact">Contact</a></nav>
+  </header>
+
+  <main>
+  <div class="hero">
+    <div>
+      <h1>Home-cooked lunch, at your desk by 1 pm.</h1>
+      <p>Fresh dal, sabzi, phulka and rice, cooked every morning in our home kitchen. Less oil, no shortcuts, and a different menu every day.</p>
+      <div class="actions">
+        <a class="btn" href="https://wa.me/910000000000?text=Hi%2C%20I%20want%20to%20order%20a%20tiffin" target="_blank" rel="noopener">Order on WhatsApp</a>
+        <a class="link" href="#menu">See this week's menu</a>
+      </div>
+      <p class="note">Monthly plans from ₹2,400. Free delivery within 5 km.</p>
+    </div>
+    <div class="dabba" aria-label="Today's tiffin">
+      <div class="dabba-day" id="dabba-day">Today's dabba</div>
+      <div class="handle" aria-hidden="true"></div>
+      <div class="tier lid" aria-hidden="true"></div>
+      <div class="tier" id="t-dal"></div>
+      <div class="tier" id="t-sabzi"></div>
+      <div class="tier" id="t-rice"></div>
+      <div class="tier" id="t-roti"></div>
+    </div>
+  </div>
+  </main>
+</div>
+
+<section class="tinted" id="menu">
+  <div class="wrap">
+    <h2>This week's menu</h2>
+    <p class="lead">Every tiffin has a dal, a seasonal sabzi, rice, four phulkas, salad and pickle. Sunday is our day off.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th scope="col">Day</th><th scope="col">Dal</th><th scope="col">Sabzi</th><th scope="col">Rice</th><th scope="col">Extra</th></tr></thead>
+        <tbody id="menu-body"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="plans">
+  <div class="wrap">
+    <h2>Pick a plan</h2>
+    <p class="lead">Pause or skip any day by sending a message before 9 am. Unused days carry over.</p>
+    <div class="plans">
+      <div class="plan">
+        <h3>Trial</h3>
+        <p>One full tiffin, so you can taste it before you commit.</p>
+        <div class="price">₹120</div>
+      </div>
+      <div class="plan">
+        <h3>Weekly</h3>
+        <p>Six lunches, Monday to Saturday.</p>
+        <div class="price">₹650 <small>/ week</small></div>
+      </div>
+      <div class="plan pick">
+        <h3>Monthly <span class="tag">Most chosen</span></h3>
+        <p>26 lunches, plus a sweet every Saturday.</p>
+        <div class="price">₹2,400 <small>/ month</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tinted">
+  <div class="wrap">
+    <h2>How ordering works</h2>
+    <p class="lead">No app, no login. Most customers are set up in five minutes.</p>
+    <ol class="steps">
+      <li><h3>Message us</h3><p>Send your name, address and plan on WhatsApp.</p></li>
+      <li><h3>Pay by UPI</h3><p>We share a UPI link. Pay daily, weekly or monthly.</p></li>
+      <li><h3>Lunch arrives</h3><p>Your tiffin reaches you between 12 and 1 pm, Monday to Saturday.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact">
+    <div>
+      <h2>Hungry already?</h2>
+      <p class="lead">Message us before 9 am to get tomorrow's lunch. Bulk orders for offices are welcome.</p>
+      <a class="btn" href="https://wa.me/910000000000?text=Hi%2C%20I%20want%20to%20order%20a%20tiffin" target="_blank" rel="noopener">Order on WhatsApp</a>
+    </div>
+    <dl>
+      <dt>Phone</dt><dd><a href="tel:+910000000000">+91 00000 00000</a></dd>
+      <dt>Kitchen</dt><dd>Your address here</dd>
+      <dt>Delivery</dt><dd>Within 5 km, 12–1 pm</dd>
+      <dt>Days</dt><dd>Monday to Saturday</dd>
+    </dl>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Demo website made by <a href="https://github.com/Surya-7348">Surya Pratap Singh</a>. Business name, prices and phone number are placeholders.</div>
+</footer>
+
+<script>
+const menu = [
+  { day: "Monday",    dal: "Dal tadka",      sabzi: "Aloo gobhi",       rice: "Jeera rice",  extra: "Boondi raita" },
+  { day: "Tuesday",   dal: "Rajma",          sabzi: "Lauki chana",      rice: "Steamed rice", extra: "Salad" },
+  { day: "Wednesday", dal: "Moong dal",      sabzi: "Bhindi masala",    rice: "Jeera rice",  extra: "Papad" },
+  { day: "Thursday",  dal: "Kadhi pakora",   sabzi: "Mix veg",          rice: "Steamed rice", extra: "Pickle" },
+  { day: "Friday",    dal: "Chana dal",      sabzi: "Paneer bhurji",    rice: "Pulao",       extra: "Raita" },
+  { day: "Saturday",  dal: "Dal makhani",    sabzi: "Matar mushroom",   rice: "Jeera rice",  extra: "Gulab jamun" }
+];
+const jsDay = new Date().getDay();               // 0 = Sunday
+const isSunday = jsDay === 0;
+const todayIndex = isSunday ? 0 : jsDay - 1;     // on Sunday, show Monday's dabba
+const t = menu[todayIndex];
+
+document.getElementById("dabba-day").textContent =
+  isSunday ? "Closed today. Monday's dabba:" : `Today's dabba, ${t.day}`;
+const tiers = [["t-dal", t.dal, "dal"], ["t-sabzi", t.sabzi, "sabzi"], ["t-rice", t.rice, "rice"], ["t-roti", "4 phulka", "with salad and " + t.extra.toLowerCase()]];
+tiers.forEach(([id, main, sub]) => {
+  document.getElementById(id).innerHTML = `<div>${main}<small>${sub}</small></div>`;
+});
+
+document.getElementById("menu-body").innerHTML = menu.map((m, i) =>
+  `<tr${!isSunday && i === todayIndex ? ' class="today"' : ""}><td>${m.day}</td><td>${m.dal}</td><td>${m.sabzi}</td><td>${m.rice}</td><td>${m.extra}</td></tr>`
+).join("");
+</script>
+</body>
+</html>
